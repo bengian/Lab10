@@ -1,16 +1,21 @@
 package it.polito.tdp.porto.model;
 
-public class Author {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Author implements Comparable<Author> {
 
 	private int id;
 	private String lastname;
 	private String firstname;
+	private List<Paper> articoli;
 		
 	public Author(int id, String lastname, String firstname) {
-		super();
 		this.id = id;
 		this.lastname = lastname;
 		this.firstname = firstname;
+		articoli=new ArrayList<Paper>();
+		
 	}
 
 	public int getId() {
@@ -41,9 +46,43 @@ public class Author {
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
+	
+	
+
+
+	public List<Paper> getArticoli() {
+		return articoli;
+	}
+
+
+
+	public void setArticoli(List<Paper> articoli) {
+		this.articoli = articoli;
+	}
+
+
+
+	@Override
+	public boolean equals(Object o) {
+		// TODO Auto-generated method stub
+		 if(!(o instanceof Author))
+			 return false;
+		 if(this.getId()==((Author) o).id)
+			 return true;
+		return false;
+	}
 
 	@Override
 	public String toString() {
-		return "Author [id=" + id + ", lastname=" + lastname + ", firstname=" + firstname + "]";
+		return lastname+" " + firstname;
+	}
+
+	@Override
+	public int compareTo(Author o) {
+		if(this.lastname.compareTo(o.getLastname())!=0){
+			return this.lastname.compareTo(o.getLastname());
+		}
+		
+		return this.firstname.compareTo(o.firstname);
 	}
 }
